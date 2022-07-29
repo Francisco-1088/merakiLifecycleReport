@@ -3,7 +3,8 @@ import meraki
 import requests
 import bs4 as bs
 import config
-import os, sys
+import sys
+import pathlib
 from PyQt5 import QtCore, QtWidgets, QtWebEngineWidgets
 
 api_key = config.api_key
@@ -56,8 +57,8 @@ for inventory in inventory_list:
     inventory_df = pd.DataFrame(inventory[key])
 
     # Don't include devices not assigned to any networks, only consider "in use" devices
-    inventory_unassigned_df = inventory_df.loc[inventory_df['networkId'].isna()]
-    inventory_assigned_df = inventory_df.loc[~inventory_df['networkId'].isna()]
+    inventory_unassigned_df = inventory_df.loc[inventory_df['networkId'].isna()].copy()
+    inventory_assigned_df = inventory_df.loc[~inventory_df['networkId'].isna()].copy()
 
     inventory_assigned_df['lifecycle']=""
 
@@ -67,7 +68,7 @@ for inventory in inventory_list:
     pattern = 'MV21|MX64|MX65|MS220-8|series'
     mask = eol_df['Product'].str.contains(pattern, case=False, na=False)
 
-    new_eol_df = eol_df[mask]
+    new_eol_df = eol_df[mask].copy()
 
     # Generate entries for specific submodels to count properly
     new_eol_df.replace(to_replace='MX64, MX64W', value = 'MX64W', inplace=True)
@@ -79,25 +80,25 @@ for inventory in inventory_list:
     # Split up MS220 and MS320 switches in their specific submodels for proper counting
     ms220_mask = new_eol_df['Product'].str.contains('MS220\xa0series', case=False, na=False)
     ms320_mask = new_eol_df['Product'].str.contains('MS320\xa0series', case=False, na=False)
-    ms220_24_row = new_eol_df[ms220_mask]
+    ms220_24_row = new_eol_df[ms220_mask].copy()
     ms220_24_row["Product"]="MS220-24"
-    ms220_24p_row = new_eol_df[ms220_mask]
+    ms220_24p_row = new_eol_df[ms220_mask].copy()
     ms220_24p_row["Product"]="MS220-24P"
-    ms220_48_row = new_eol_df[ms220_mask]
+    ms220_48_row = new_eol_df[ms220_mask].copy()
     ms220_48_row["Product"]="MS220-48"
-    ms220_48lp_row = new_eol_df[ms220_mask]
+    ms220_48lp_row = new_eol_df[ms220_mask].copy()
     ms220_48lp_row["Product"]="MS220-48LP"
-    ms220_48fp_row = new_eol_df[ms220_mask]
+    ms220_48fp_row = new_eol_df[ms220_mask].copy()
     ms220_48fp_row["Product"]="MS220-48FP"
-    ms320_24_row = new_eol_df[ms320_mask]
+    ms320_24_row = new_eol_df[ms320_mask].copy()
     ms320_24_row["Product"]="MS320-24"
-    ms320_24p_row = new_eol_df[ms320_mask]
+    ms320_24p_row = new_eol_df[ms320_mask].copy()
     ms320_24p_row["Product"]="MS320-24P"
-    ms320_48_row = new_eol_df[ms320_mask]
+    ms320_48_row = new_eol_df[ms320_mask].copy()
     ms320_48_row["Product"]="MS320-48"
-    ms320_48lp_row = new_eol_df[ms320_mask]
+    ms320_48lp_row = new_eol_df[ms320_mask].copy()
     ms320_48lp_row["Product"]="MS320-48LP"
-    ms320_48fp_row = new_eol_df[ms320_mask]
+    ms320_48fp_row = new_eol_df[ms320_mask].copy()
     ms320_48fp_row["Product"]="MS320-48FP"
 
     # Concatenate everything
@@ -194,8 +195,8 @@ def html_to_pdf(html, pdf):
   app.exec_()
 
 # Export HTML as PDF
-CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
-filename = os.path.join(CURRENT_DIR, "html_report.html")
+CURRENT_DIR = str(pathlib.Path().absolute())
+filename = CURRENT_DIR+"/html_report.html"
 print(filename)
 
 html_to_pdf(filename, "Lifecycle Report.pdf")
