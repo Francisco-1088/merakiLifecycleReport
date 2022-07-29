@@ -197,6 +197,5 @@ def html_to_pdf(html, pdf):
 # Export HTML as PDF
 CURRENT_DIR = str(pathlib.Path().absolute())
 filename = CURRENT_DIR+"/html_report.html"
-print(filename)
 
 html_to_pdf(filename, "Lifecycle Report.pdf")
