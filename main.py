@@ -133,11 +133,7 @@ html = f'''
         <style>
         body {{font-family: Inter, Arial, sans-serif; margin: 15px;}}
         h {{font-family: Inter, Arial, sans-serif; margin: 15px;}}
-        h1 {{font-family: Inter, Arial, sans-serif; margin: 15px;}}
         h2 {{font-family: Inter, Arial, sans-serif; margin: 15px;}}
-        h3 {{font-family: Inter, Arial, sans-serif; margin: 15px;}}
-        h4 {{font-family: Inter, Arial, sans-serif; margin: 15px;}}
-        h5 {{font-family: Inter, Arial, sans-serif; margin: 15px;}}
         table {{border-collapse: collapse; margin: 15px;}}
         th {{text-align: left; background-color: #04AA6D; color:white; padding: 8px;}}
         td {{padding: 8px;}}
@@ -157,7 +153,7 @@ html = f'''
 # For each EOL Report, add a section to the HTML document
 for i in range(len(eol_report_list)):
   add_html = f'''
-            <h{str(i+1)}>{eol_report_list[i]['name']}</h{str(i+1)}>
+            <h2>{eol_report_list[i]['name']}</h2>
             {eol_report_list[i]['report'].to_html(render_links=True, escape=False, index=False)}
             '''
   html = html+add_html
