@@ -30,7 +30,7 @@ This script allows you to obtain a report of all of the End of Sales and End of 
 
 1. Active Cisco Meraki subscriptions in the orgs where the script will be run
 2. API access enabled for these organizations, as well as an API Key with access to them. See how to enable [here](https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API)
-3. A working Python environment
+3. A working Python 3.0 environment
 4. Install libraries in `requirements.txt`
 
 <a name="howtouse"/>
