@@ -20,8 +20,11 @@ table = soup.find('table')
 links = []
 for row in table.find_all('tr'):
   for td in row.find_all('td'):
-    if td.find('a'):
-      links.append(str(td.a))
+    sublinks = []
+    if td.find_all('a'):
+      for a in td.find_all('a'):
+        sublinks.append(str(a))
+      links.append(sublinks)
 
 # Add links to dataframe
 eol_df = dfs[0]
