@@ -13,7 +13,7 @@ Obtain a lifecycle report from all of your Cisco Meraki organizations, detailing
 
 [Results](#results)
 
-<a name="intro"/>
+<a name="intro"></a>
 
 # Introduction
 
@@ -24,7 +24,7 @@ This script allows you to obtain a report of all of the End of Sales and End of 
 3. End of Sales and End of Support Dates
 4. Links to Upgrade paths for each SKU
 
-<a name="prereq"/>
+<a name="prereq"></a>
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ This script allows you to obtain a report of all of the End of Sales and End of 
 3. A working Python 3.0 environment
 4. Install libraries in `requirements.txt`
 
-<a name="howtouse"/>
+<a name="howtouse"></a>
 
 ## How to Use
 
@@ -51,7 +51,7 @@ Selecting a single organization.
 ![image alt text](images/multi_org.png)
 Selecting multiple organizations.
 
-<a name="results"/>
+<a name="results"></a>
 
 ## Results
 
